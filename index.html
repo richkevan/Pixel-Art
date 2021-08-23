@@ -1,0 +1,166 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Art Maker</title>
+    <style>
+    html {
+        background: radial-gradient(
+            circle at top left,
+            rgba(0, 47, 255, 0.5),
+            transparent
+        ),
+        radial-gradient(
+            circle at top right,
+            rgba(132, 0, 255, 0.5),
+            transparent
+        ),
+        radial-gradient(at bottom left, rgba(255, 187, 0, 0.609), transparent),
+        radial-gradient(at bottom right, rgba(250, 0, 125, 0.5), transparent);
+        width: 100vw;
+        height: 100vh;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    h2 {
+        font-family: "Gill Sans";
+        font-size: 1.2em;
+        font-weight: 400;
+        color: rgb(153, 153, 153);
+        margin: 0;
+    }
+    input {
+        background: black;
+        color: white;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        border-radius: 0.9em;
+        background-color: rgb(229, 229, 229);
+    }
+    .row {
+        display: flex;
+    }
+    .pixel {
+        width: 1em;
+        height: 1em;
+        border: 0.01em solid rgb(229, 229, 229);
+        background-color: white;
+    }
+    /* .pixel:hover {
+        cursor: url("./cursor.cur") 1 100, auto;
+    } */
+    .palette {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: rgb(229, 229, 229);
+        align-items: center;
+    }
+    .colors {
+        width: 1.6em;
+        height: 1.6em;
+        border: 0.1em solid rgb(187, 187, 187);
+        border-radius: 50%;
+        display: flex;
+        margin: 0.2em;
+        cursor: pointer;
+    }
+    #headerBar {
+        border: inset 2px goldenrod;
+        background: radial-gradient(darkblue, blue);
+        color: white;
+        width: 50vw;
+        margin: 0.5em 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    </style>
+
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generate = document.getElementById('generatorButton')
+            const widthInput = document.getElementById('width')
+            const heightInput = document.getElementById('height')
+            const canvas = document.getElementById('canvas')
+            const pallete = document.getElementById('pallete')
+            const clear = document.getElementById('clear')
+            var height;
+            var width;
+            var mouseDown = false
+            var chosenColor = 'aliceblue';
+            
+            document.body.addEventListener('mousedown', () => {
+                mouseDown = true
+            })
+            document.body.addEventListener('mouseup', () => {
+                mouseDown = false
+            })
+            clear.addEventListener('click', () => {
+                let pixels = document.getElementsByClassName('pixel')
+                console.log(pixels)
+                for (y=0;y<pixels.length;x++) {
+                    pixels[y].style.backgroundColor = '#fff'
+                }
+            })
+            generate.addEventListener('click', () => {
+                height = widthInput.value 
+                width = heightInput.value
+                
+                for (height;height>0;height --) {
+                    var row = document.createElement('div')
+                    row.className ='row'
+                    for (i = width;i>0;i --) {
+                        let pixel = document.createElement("div");
+                        pixel.className = 'pixel'
+                        pixel.id = `${height}-${i}`
+                        pixel.addEventListener('click', () => {
+                            pixel.style.backgroundColor = chosenColor
+                        })
+                        pixel.addEventListener('mousemove', () => {
+                            if (mouseDown == true) {
+                                pixel.style.backgroundColor = chosenColor
+                            }  
+                        })
+                        row.appendChild(pixel)
+                    }
+                    canvas.appendChild(row)  
+                }
+      
+            })
+            basicColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
+                console.log(basicColors.length)
+                for (x=0;x<basicColors.length ;x++) {
+                    let color = document.createElement('div')
+                    color.style.height = '20px'
+                    color.style.width = '20px'
+                    color.style.backgroundColor = basicColors[x]
+                    color.addEventListener('click', () => {
+                        chosenColor = color.style.backgroundColor
+                        console.log(chosenColor)
+                    })
+                    pallete.appendChild(color)   
+                }
+        })
+    </script>
+</head>
+<body>
+    <div id="headerBar">
+    Width:
+    <input type="number" id="width" />
+    Height:
+    <input type="number" id="height" />
+    <button id="generatorButton">Generate!</button>
+    <button id="clear">Clear</button>
+    </div>
+    <div id="pallete" style="display: flex; flex-flow: row nowrap;"></div>
+    <div id="canvas"></div>
+</body>
+</html>
