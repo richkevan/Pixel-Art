@@ -1,0 +1,98 @@
+html {
+    background: radial-gradient(
+        circle at top left,
+        rgba(0, 47, 255, 0.5),
+        transparent
+    ),
+    radial-gradient(
+        circle at top right,
+        rgba(132, 0, 255, 0.5),
+        transparent
+    ),
+    radial-gradient(at bottom left, rgba(255, 187, 0, 0.609), transparent),
+    radial-gradient(at bottom right, rgba(250, 0, 125, 0.5), transparent);
+    width: 100vw;
+    height: 100vh;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    font-family: "Gill Sans";
+    font-size: 1.2em;
+    font-weight: 400;
+    color: rgb(153, 153, 153);
+    margin: 0;
+}
+input {
+    background: black;
+    color: white;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 0.9em;
+    background-color: rgb(229, 229, 229);
+}
+.row {
+    display: flex;
+}
+.pixel {
+    width: 1em;
+    height: 1em;
+    border: 0.01em solid rgb(229, 229, 229);
+    background-color: white;
+}
+/* .pixel:hover {
+    cursor: url("./cursor.cur") 1 100, auto;
+} */
+.palette {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(229, 229, 229);
+    align-items: center;
+}
+.colors {
+    width: 1.6em;
+    height: 1.6em;
+    border: 0.1em solid rgb(187, 187, 187);
+    border-radius: 50%;
+    display: flex;
+    margin: 0.2em;
+    cursor: pointer;
+}
+#headerBar {
+    border: outset 2px goldenrod;
+    background: radial-gradient(darkblue, blue);
+    color: white;
+    width: 75vw;
+    margin: 0.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#headerBar > * {
+    padding: 2px 15px;
+}
+
+#clear {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    #headerBar {
+        width: 100vw;
+        flex-flow: column nowrap;
+    }
+
+    #headerBar > * {
+        padding: 20px 15px;
+    }
+    
+}
